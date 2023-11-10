@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>UNMANNED AERIAL SOLUTIONS SERVICE MANAGEMENT SYSTEM</title>
+
+  <!-- Custom fonts for this template-->
+  <!-- Add Bootstrap JS script -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Arial", sans-serif;
+      background-color: #f0fbff;
+    }
+
+    header {
+      background-color: #173154;
+      color: #fff;
+      padding: 10px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+    }
+
+    nav li {
+      padding: 10px 20px;
+    }
+
+    nav li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    nav li a:hover {
+      background-color: #0056b3;
+      border-radius: 5px;
+    }
+
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+
+    hr {
+      border-color: #333;
+    }
+
+    .form {
+      max-width: 800px;
+      margin: 20px auto;
+      /* Added margin for better positioning */
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      /* Adjusted width to occupy 90% of the available screen space */
+    }
+
+    /* Center the form horizontally */
+    @media (max-width: 992px) {
+      .form {
+        width: 100%;
+        /* Make the form occupy the full width on smaller screens */
+      }
+    }
+
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      color: #333;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    button[type="submit"]:focus {
+      outline: none;
+    }
+
+    /* Main container */
+    .dashboard-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Left sidebar */
+    .sidebar {
+      flex: 0 0 300px;
+      background-color: #f8f9fa;
+      padding: 20px;
+    }
+
+    /* Sidebar heading */
+    .sidebar h3 {
+      color: #333;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    /* Sidebar links */
+    .sidebar a {
+      display: block;
+      color: #007bff;
+      text-decoration: none;
+      margin-bottom: 10px;
+    }
+
+    /* Form container */
+    .form-container {
+      margin-top: 20px;
+      background-color: #f0f8ff;
+      /* Light Blue background color */
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .form-container label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .form-container button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      width: 100%;
+      /* Make the button occupy the full width of its container */
+      text-align: center;
+      /* Center the button text */
+    }
+
+    .form-container button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Custom styles for the project title */
+    .project-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 20px 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 99;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .back-to-top:hover {
+      background-color: #0056b3;
+    }
+
+    /* Your existing styles here */
+
+    /* Footer styles */
+    .footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+      position: fixed;
+      /* Changed from 'absolute' to 'fixed' */
+      left: 0;
+      bottom: 0;
+    }
+
+    .footer-content {
+      max-width: 600px;
+      margin: 0 aut;
+
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    .footer-links li {
+      display: inline-block;
+      margin-right: 15px;
+    }
+
+    .footer-links li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer-links li a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body class="">
+
+  <header>
+
+    <nav>
+
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="AssessmentInstitution.html">Services</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <h1 class="project-title">Request Services Your Want Form</h1>
+  <!-- Dashboard Start -->
+  <div class="dashboard-container">
+
+
+
+
+    <form id="myForm" class="form" method="POST">
+      <!-- Existing form fields -->
+      <div id="section1">
+        <div class="form-group">
+          <label for="sizeOfLand">Your Full Name</label>
+          <input type="text" id="fullname" placeholder="Your Full Name">
+        </div>
+
+        <div class="form-group">
+          <label for="sizeOfLand">Your ID</label>
+          <input type="text" id="ID" placeholder="Your Title" required>
+        </div>
+        <div class="form-group">
+          <label for="classrooms">Your contact_information</label>
+          <input type="text" id="contact_information" placeholder="Your Compagne Name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="library">Your Email</label>
+          <input type="email" id="Email" placeholder="Your Email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="computerLabs">Your Tin Number</label>
+          <input type="text" id="YourTinNumber" placeholder="Your Tin Number" required>
+        </div>
+
+        <div class="form-group">
+          <label for="administrationBloc">Your Adress</label>
+          <input type="text" id="YourAdress" placeholder="Enter Your Adress" required>
+        </div>
+
+        <div class="form-group">
+          <label for="administrationBloc">Dete</label>
+          <input type="date" id="Dete" required>
+        </div>
+
+
+        <div class="form-group">
+          <label for="boardRegulations">Description of the Activity/purpose</label>
+          <textarea id="DescriptionoftheActivity" placeholder="Enter board regulations" required></textarea>
+        </div>
+
+
+        <div>
+          <a href="#" id="next1" class="btn btn-primary btn-user btn-block">Next</a>
+          <hr>
+        </div>
+      </div>
+
+
+      <div id="section2" style="display: none;">
+        <div class="col-12">
+          <h1>Location of The Activity</h1>
+          <hr>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="activityProvince">Activity Province</label>
+            <select class="form-control bg-light border-0 px-4" id="activityProvince">
+              <option selected>Activity Province</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+            <label for="activityDistrict">Activity District</label>
+            <select class="form-control bg-light border-0 px-4" id="activityDistrict">
+              <option selected>Activity District</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="activitySector">Activity Sector</label>
+            <select class="form-control bg-light border-0 px-4" id="activitySector">
+              <option selected>Activity Sector</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="activityCell">Activity Cell</label>
+            <select class="form-control bg-light border-0 px-4" id="activityCell">
+              <option selected>Activity Cell</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="activityVillage">Activity Village</label>
+            <select class="form-control bg-light border-0 px-4" id="activityVillage">
+              <option selected>Activity Village</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+        </div>
+        <a href="#" id="prev2" class="btn btn-secondary btn-user btn-block">Previous</a>
+        <a href="#" id="next2" class="btn btn-primary btn-user btn-block">Next</a>
+        <hr>
+      </div>
+
+
+      <div id="section3" style="display: none;" class="container mt-5">
+        <div class="row">
+          <div class="col-12">
+            <h4>Services needed and Information Provided</h4>
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h5>Services Requested</h5>
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-6">
+            <div class="form-check">
+              <input type="checkbox" id="aerialPhotographyCheckbox" class="form-check-input">
+              <label for="aerialPhotographyCheckbox" class="form-check-label">Aerial Photography/VideoGraphy</label>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-check">
+              <input type="checkbox" id="roundwithprecisionagriculture" class="form-check-input">
+              <label for="roundwithprecisionagriculture" class="form-check-label">round with precision
+                agriculture</label>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-check">
+              <input type="checkbox" id="photography and videography" class="form-check-input">
+              <label for="aerialPhotographyCheckbox" class="form-check-label">photography and videography</label>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-check">
+              <input type="checkbox" id="Precise, labor saving operations" class="form-check-input">
+              <label for="aerialPhotographyCheckbox" class="form-check-label">Precise, labor saving operations</label>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-check">
+              <input type="checkbox" id="Mining" class="form-check-input">
+              <label for="aerialPhotographyCheckbox" class="form-check-label">Mining</label>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-check">
+              <input type="checkbox" id="Mapping" class="form-check-input">
+              <label for="aerialPhotographyCheckbox" class="form-check-label">Mapping</label>
+            </div>
+          </div>
+
+          <div>
+            <a href="#" id="next4" class="btn btn-primary btn-user btn-block">Next</a>
+            <hr>
+          </div>
+          <!-- Similar checkbox and label rows can be added here -->
+        </div>
+
+
+      </div>
+
+      <div id="section5" style="display: none;">
+        <div class="col-12">
+          <h5>Aerial Mapping</h5>
+          <hr>
+        </div>
+        <div class="col-6">
+          <input type="checkbox" id="orthophotoCheckbox" class="form-check-input">
+          <label for="orthophotoCheckbox" class="form-check-label">Orthophoto</label>
+        </div>
+        <div class="col-6">
+          <input type="checkbox" id="aerialSurveyCheckbox" class="form-check-input">
+          <label for="aerialSurveyCheckbox" class="form-check-label">Aerial Survey/Full Topography</label>
+        </div>
+        <div class="col-6">
+          <input type="checkbox" id="aerialSprayingCheckbox" class="form-check-input">
+          <label for="aerialSprayingCheckbox" class="form-check-label">Aerial Spraying</label>
+        </div>
+        <div class="col-6">
+          <input type="checkbox" id="ndviCheckbox" class="form-check-input">
+          <label for="ndviCheckbox" class="form-check-label">NDVI</label>
+        </div>
+        <div class="col-6">
+          <input type="checkbox" id="aerialMonitoringCheckbox" class="form-check-input">
+          <label for="aerialMonitoringCheckbox" class="form-check-label">Aerial Monitoring/Construction</label>
+        </div>
+        <div class="col-6">
+          <input type="checkbox" id="otherInformationCheckbox" class="form-check-input">
+          <label for="otherInformationCheckbox" class="form-check-label">Other Important Information</label>
+        </div>
+        <div class="form-group">
+          <label for="classrooms">Signature</label>
+          <input type="text" id="Signature" placeholder="Signature" required>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary btn-user btn-block">Submit</button>
+          <hr>
+        </div>
+      </div>
+
+      <!-- Back to Top -->
+      <a href="http://127.0.0.1:5502/CHARIS_UNMANNED_AERIAL_SOLUTIONS-master/service.html"
+        class="btn btn-secondary py-3 fs-4 back-to-top">Back<i class="bi bi-arrow-up"></i></a>
+    </form>
+
+    <script src="script.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Get references to the form sections
+        const section1 = document.getElementById('section1');
+        const section2 = document.getElementById('section2');
+        const section3 = document.getElementById('section3');
+        const section5 = document.getElementById('section5');
+
+        // Get references to the next buttons
+        const next1Button = document.getElementById('next1');
+        const next2Button = document.getElementById('next2');
+        const next4Button = document.getElementById('next4');
+
+        // Add click event listeners to the next buttons
+        next1Button.addEventListener('click', function (e) {
+          e.preventDefault();
+          section1.style.display = 'none';
+          section2.style.display = 'block';
+        });
+
+        next2Button.addEventListener('click', function (e) {
+          e.preventDefault();
+          section2.style.display = 'none';
+          section3.style.display = 'block';
+        });
+
+        next4Button.addEventListener('click', function (e) {
+          e.preventDefault();
+          section5.style.display = 'block';
+          section3.style.display = 'none'; // Hide section3 when moving to section5
+        });
+
+      });
+    </script>
+
+
+
+
+    <script>
+
+      async function fetchUserData() {
+        var name = document.getElementById('fullname').value;
+        var customerId = document.getElementById('ID').value
+        var contact_information = document.getElementById('contact_information').value
+        var email = document.getElementById('Email').value;
+        var TIN = document.getElementById('YourTinNumber').value;
+        var Province = document.getElementById('activityProvince');
+        var District = document.getElementById('activityDistrict');
+        var Sector = document.getElementById('activitySector');
+        var Cell = document.getElementById('activityCell');
+        var Village = document.getElementById('activityVillage');
+
+
+        // National_ID_Type
+        const response = await fetch('http://127.0.0.1:8000/Educationdata/');
+        const data = await response.json();
+
+        for (let i = 0; i < data.length; i++) {
+          // console.log(data[i])
+          const option = document.createElement('option');
+          option.value = data[i].Education_Description;
+          option.textContent = data[i].Education_Description;
+          Education.appendChild(option); // Append to the select element
+          // console.log(data[i].ID_Type)
+        }
+        // National_ID_Type
+        var patient_gender = await fetch('http://127.0.0.1:8000/Genderdata/');
+        var patientGendaData = await patient_gender.json();
+        for (var i = 0; i < patientGendaData.length; i++) {
+          console.log('patientGendaData: ' + patientGendaData[i].GenderDescription)
+          var option = document.createElement('option');
+          option.value = patientGendaData[i].GenderDescription;
+          option.textContent = patientGendaData[i].GenderDescription;
+          gender.appendChild(option)
+
+        }
+
+
+        // Province
+        var Provinceda = await fetch('http://127.0.0.1:8000/Provincedata/');
+        var Provincedata = await Provinceda.json();
+
+        for (var i = 0; i < Provincedata.length; i++) {
+          var option = document.createElement('option');
+          option.value = Provincedata[i].Province_List_Description;
+          option.textContent = Provincedata[i].Province_List_Description;
+          Province.appendChild(option);
+        }
+
+        // District
+        var Districtdata = await fetch('http://127.0.0.1:8000/Districtdata/');
+        var districtresult = await Districtdata.json();
+
+        Province.addEventListener('change', function () {
+          var selectedProvince = Province.value;
+          // patientData.selectedProvince = selectedProvince;
+          District.innerHTML = ''; // Clear previous options
+
+          for (var i = 0; i < districtresult.length; i++) {
+            if (districtresult[i].Province_List_Description === selectedProvince) {
+              var option = document.createElement('option');
+              option.value = districtresult[i].District_List_Description;
+              option.textContent = districtresult[i].District_List_Description;
+              District.appendChild(option);
+            }
+          }
+        });
+
+
+        // sector
+        var sectordata = await fetch('http://127.0.0.1:8000/Sectordata/');
+        var sectorresult = await sectordata.json();
+
+        District.addEventListener('change', function () {
+          var selectedDistrict = District.value;
+          // patientData.selectedDistrict = selectedDistrict;
+          Sector.innerHTML = ''; // Clear previous options
+
+          for (var i = 0; i < sectorresult.length; i++) {
+            if (sectorresult[i].District_List_Description === selectedDistrict) {
+              var option = document.createElement('option');
+              option.value = sectorresult[i].Sector_List_Description;
+              option.textContent = sectorresult[i].Sector_List_Description;
+              Sector.appendChild(option);
+            }
+          }
+        });
+
+        // cell
+        var celldata = await fetch('http://127.0.0.1:8000/Celldata/');
+        var cellresult = await celldata.json();
+
+        Sector.addEventListener('change', function () {
+          var selectedSector = Sector.value;
+
+          Cell.innerHTML = ''; // Clear previous options
+
+          for (var i = 0; i < cellresult.length; i++) {
+
+            if (cellresult[i].Sector_List_Description === selectedSector) {
+              console.log('cellresult ' + cellresult[i].Cell_List_Description)
+              var option = document.createElement('option');
+              option.value = cellresult[i].Cell_List_Description;
+              option.textContent = cellresult[i].Cell_List_Description;
+              Cell.appendChild(option);
+            }
+          }
+        });
+
+        // village
+        var villagedata = await fetch('http://127.0.0.1:8000/Villagedata/');
+        var villageresult = await villagedata.json();
+
+        Cell.addEventListener('change', function () {
+          var selectedCell = Cell.value;
+
+          Village.innerHTML = ''; // Clear previous options
+
+          for (var i = 0; i < villageresult.length; i++) {
+            if (villageresult[i].Cell_List_Description === selectedCell) {
+              var option = document.createElement('option');
+              option.value = villageresult[i].Vilage_List_Description;
+              option.textContent = villageresult[i].Vilage_List_Description;
+              Village.appendChild(option);
+            }
+          }
+
+
+        });
+
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        // ... Your existing code ...
+
+        // Add an event listener to the form for submission
+        const myForm = document.getElementById('myForm');
+        myForm.addEventListener('submit', function (event) {
+          event.preventDefault(); // Prevent the form from submitting normally
+          showdata(); // Call your data submission function
+        });
+      });
+
+      async function showdata() {
+        // ... Your existing code ...
+        var UserId = document.getElementById('ID').value;
+        var fullName = document.getElementById('fullname').value
+        var email = document.getElementById('Email').value
+        var contact = document.getElementById('contact_information').value
+        var Tin = document.getElementById('YourTinNumber').value;
+
+        var adress = document.getElementById('YourAdress').value;
+        var date = document.getElementById('Dete').value;
+        var descriptionactivities = document.getElementById('DescriptionoftheActivity').value;
+        var Province = document.getElementById('activityProvince');
+        var District = document.getElementById('activityDistrict');
+        var Sector = document.getElementById('activitySector');
+        var Cell = document.getElementById('activityCell');
+        var Village = document.getElementById('activityVillage');
+        // Get the selected values of the select elements
+        var selectedProvince = Province.value;
+        var selectedDistrict = District.value;
+        var selectedSector = Sector.value;
+        var selectedCell = Cell.value;
+        var selectedVillage = Village.value;
+
+        // Check if checkboxes are checked
+        var aerialPhotographyCheckbox = document.getElementById('aerialPhotographyCheckbox').checked;
+        var roundwithprecisionagriculture = document.getElementById('roundwithprecisionagriculture').checked;
+        var photographyandvideography = document.getElementById('photographyandvideography').checked;
+        var Preciselaborsavingoperations = document.getElementById('Preciselaborsavingoperations').checked;
+        var Mining = document.getElementById('Mining').checked;
+        var Mapping = document.getElementById('Mapping').checked;
+        var orthophotoCheckbox = document.getElementById('orthophotoCheckbox').checked;
+        var aerialSurveyCheckbox = document.getElementById('aerialSurveyCheckbox').checked;
+        var aerialSprayingCheckbox = document.getElementById('aerialSprayingCheckbox').checked;
+        var ndviCheckbox = document.getElementById('ndviCheckbox').checked;
+        var otherInformationCheckbox = document.getElementById('otherInformationCheckbox').checked;
+
+        // Create an object with the form data
+        var formData = {
+          service_name: "round with precision agriculture",
+          UserId: UserId, // Use the actual value
+          fullName: fullName,
+          description: descriptionactivities, // Use the actual value
+          TinNumber: Tin,
+          Dete: date,
+          DescriptionoftheActivity: descriptionactivities,
+          LocationofTheActivity: LocationofTheActivity, // Use the actual value
+          Activity_province: selectedProvince,
+          Activity_district: selectedDistrict,
+          Activity_sector: selectedSector,
+          Activity_cell: selectedCell,
+          Activity_village: selectedVillage,
+          aerialPhotographyCheckbox: aerialPhotographyCheckbox,
+          roundwithprecisionagriculture: roundwithprecisionagriculture,
+          photographyandvideography: photographyandvideography,
+          Preciselaborsavingoperations: Preciselaborsavingoperations,
+          Mining: Mining,
+          Mapping: Mapping,
+          orthophotoCheckbox: orthophotoCheckbox,
+          aerialSurveyCheckbox: aerialSurveyCheckbox,
+          aerialSprayingCheckbox: aerialSprayingCheckbox,
+          ndviCheckbox: ndviCheckbox,
+          otherInformationCheckbox: otherInformationCheckbox,
+          Signature: Signature
+        };
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/services/", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+
+          if (response.ok) {
+            // Data submitted successfully
+            window.location.href = "login.html"; // Redirect or perform any other action
+          } else {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+        } catch (e) {
+          console.log(`An error occurred: ${e}`);
+        }
+      }
+
+
+    </script>
+
+
+  </div>
+  </div>
+
+</body>
+
+</html>

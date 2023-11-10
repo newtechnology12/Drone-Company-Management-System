@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Application Progress Tracking</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.20.0/dist/pdf-lib.min.js"></script>
+
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Arial", sans-serif;
+            background-color: #f0fbff;
+        }
+
+
+        .tracking-form {
+            background-color: #ffffff;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Style the secret code input and label */
+        .secret-code-label {
+            font-size: 16px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        #secretCode {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+
+        header {
+            background-color: #173154;
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+        }
+
+        nav li {
+            padding: 10px 20px;
+        }
+
+        nav li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav li a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+
+        /* Main container */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            padding: 20px;
+            border-radius: 5px;
+
+            overflow-y: auto;
+            /* Added to enable vertical scrolling */
+        }
+
+        /* Left sidebar */
+        .sidebar {
+            flex: 0 0 300px;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        /* Sidebar heading */
+        .sidebar h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Sidebar links */
+        .sidebar a {
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        /* Form container */
+        .form-container {
+            margin-top: 20px;
+            background-color: #f0f8ff;
+            /* Light Blue background color */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .form-container label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .form-container button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Custom styles for the project title */
+        .project-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tracking Form */
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form.tracking-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form.tracking-form label {
+            margin-bottom: 10px;
+        }
+
+        form.tracking-form input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        form.tracking-form button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form.tracking-form button:hover {
+            background-color: #45a049;
+        }
+
+        #progressContainer {
+            margin-top: 20px;
+            display: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        #progressContainer p {
+            margin: 0;
+        }
+
+
+        /* Footer styles */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            position: fixed;
+            /* Changed from 'absolute' to 'fixed' */
+            left: 0;
+            bottom: 0;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 aut;
+
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .footer-links li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .footer-links li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-links li a:hover {
+            text-decoration: underline;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 99;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .progress-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        .progress-table th,
+        .progress-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .progress-table th {
+            background-color: #f2f2f2;
+        }
+
+        .help-button {
+            background-color: #ff9800;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .help-button:hover {
+            background-color: #f57c00;
+        }
+
+        #claimHelpForm {
+            display: none;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+
+        #claimHelpForm h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #helpForm label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #helpForm input[type="text"],
+        #helpForm textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #helpForm textarea {
+            resize: vertical;
+        }
+
+        #helpForm button {
+            background-color: #ff9800;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #helpForm button:hover {
+            background-color: #f57c00;
+        }
+
+        h6 {
+            color: #757575;
+            font-family: "Outfit", sans-serif;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #173154;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- <li><a href="login.html">Login</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    <!-- Dashboard Start -->
+    <div class="dashboard-container">
+        <!-- Tracking Form -->
+        <div class="container">
+            <h6 class="project-title"> Level of execution</h6>
+            <hr>
+            <form id="trackingForm" class="tracking-form">
+                <label class="project-title" for="schoolCode">Customer ID:</label>
+                <input type="text" id="schoolCode" name="schoolCode" required>
+                <!-- Add the secret code input field -->
+                <label class="secret-code-label" for="secretCode">Secret Code:</label>
+                <input type="password" id="secretCode" name="secretCode" required>
+                <button type="submit">Track Progress</button>
+            </form>
+
+            <!-- Tracking Form -->
+            <div class="container">
+                <!-- ... (your existing HTML code) ... -->
+                <div id="progressContainer" class="progress-container">
+                    <!-- Progress information will be displayed here -->
+                    <h2>Progress Details</h2>
+                    <table class="progress-table">
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Result message</th>
+                            <th>Activity name</th>
+                            <th>Support</th>
+                        </tr>
+                        <tbody id="progressTableBody">
+                            <!-- Progress data will be inserted here dynamically -->
+                        </tbody>
+                    </table>
+                    <button id="claimHelpButton" class="help-button" style="display: none;">Claim Help</button>
+
+                    <div id="claimHelpForm" style="display: none;">
+                        <h2>Claim Help Form</h2>
+                        <form id="helpForm">
+                            <label for="phoneNumber">Phone Number:</label>
+                            <input type="text" id="phoneNumber" name="phoneNumber" required>
+                            <label for="message">Message:</label>
+                            <textarea id="message" name="message" required></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                &copy; 2023 UNMANNED AERIAL SOLUTIONS SERVICE MANAGEMENT SYSTEM
+            </footer>
+            <!-- Back to Top -->
+            <!-- <a href="AssessmentInstitution copy.html" class="btn btn-secondary py-3 fs-4 back-to-top">Back<i
+                    class="bi bi-arrow-up"></i></a> -->
+        </div>
+
+        <!-- Footer -->
+
+
+
+        <script>
+            // Your JavaScript code here
+
+            document.getElementById('trackingForm').addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const schoolCode = document.getElementById('schoolCode').value;
+                const progressData = await getProgressData(schoolCode);
+
+                if (progressData) {
+                    displayProgress(progressData);
+                } else {
+                    alert('School code not found. Please enter a valid school code.');
+                }
+            });
+
+            async function getProgressData(schoolCode) {
+                try {
+                    const response = await fetch('http://127.0.0.1:8000/legalcompliance/');
+                    const progressResult = await response.json();
+
+                    for (let i = 0; i < progressResult.length; i++) {
+                        if (progressResult[i].schoolCode === schoolCode) {
+                            return progressResult[i];
+                        }
+                    }
+
+                    return null; // Return null if school code is not found
+                } catch (error) {
+                    console.error('Error fetching progress data:', error);
+                    return null; // Return null if there's an error in API call
+                }
+            }
+
+            function displayProgress(progressData) {
+                const progressTableBody = document.getElementById('progressTableBody');
+                progressTableBody.innerHTML = `
+                <tr>
+                    <td>${progressData.contact_info}</td>
+                    <td>${progressData.Message}</td>
+                    <td>${progressData.SearchName}</td>
+                    <td>${'0780439418'}</td>
+                </tr>
+            `;
+                const claimHelpButton = document.getElementById('claimHelpButton');
+                const claimHelpForm = document.getElementById('claimHelpForm');
+
+                claimHelpButton.style.display = 'block';
+                claimHelpButton.addEventListener('click', () => {
+                    claimHelpForm.style.display = 'block';
+                });
+
+                const helpForm = document.getElementById('helpForm');
+                helpForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const phoneNumber = document.getElementById('schoolCode').value;
+                    const message = document.getElementById('message').value;
+                    // Replace this with your actual logic to handle the form submission and claiming process
+                    alert(`You have claimed help for this school. Phone Number: ${phoneNumber}, Message: ${message}`);
+                    claimHelpForm.style.display = 'none';
+                });
+
+                document.getElementById('progressContainer').style.display = 'block';
+            }
+            document.addEventListener('DOMContentLoaded', async function () {
+                const defaultSchoolCode = "YourDefaultSchoolCode"; // Set your default school code here
+                const progressData = await getProgressData(defaultSchoolCode);
+                if (progressData) {
+                    displayProgress(progressData);
+                }
+            });
+        </script>
+</body>
+
+</html>
+
+
+</body>
+
+</html>

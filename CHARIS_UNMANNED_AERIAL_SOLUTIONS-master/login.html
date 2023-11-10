@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>UNMANNED AERIAL SOLUTIONS SERVICE MANAGEMENT SYSTEM</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <style>
+        .bg-login-image {
+            position: relative;
+        }
+
+        .login-image {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 40px;
+            border-radius: 10px;
+            /* Adds rounded corners to the container */
+            height: 500px;
+            /* Sets the height of the container to 300 pixels */
+            width: 500px;
+            /* Sets the width of the container to 400 pixels */
+            padding: 20px;
+            /* Adds padding inside the container */
+            background-color: #f0f0f0;
+            /* Sets a background color for the container */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            /* Adds a subtle shadow effect */
+        }
+
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Arial", sans-serif;
+            background-color: #f0fbff;
+        }
+
+        header {
+            background-color: #173154;
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+        }
+
+        nav li {
+            padding: 10px 20px;
+        }
+
+        nav li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav li a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+    </style>
+
+</head>
+
+<body class="">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="login.html">Login</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
+                            <div class="col-lg-6 d-none d-lg-block ">
+                                <!-- <h4>Science and Technology Standards Compliance Checkup System</h4> -->
+                                <hr>
+                                <img src="img/drone15.png" alt="Login Image" class="login-image">
+                            </div>
+
+
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    </div>
+                                    <form class="user" id="loginForm">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address...">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                id="exampleInputPassword" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Remember
+                                                    Me</label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" id="loginButton"
+                                            class="btn btn-primary btn-user btn-block">
+                                            Login
+                                        </button>
+
+                                        <hr>
+                                        <a href="service.html" class="btn btn-google btn-user btn-block">
+                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                        </a>
+                                        <a href="service.html" class="btn btn-facebook btn-user btn-block">
+                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                        </a>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="register.html">Create an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        async function fetchUserLoginData(event) {
+            event.preventDefault();
+            var exampleInputEmail = document.getElementById('exampleInputEmail').value;
+            var passd = document.getElementById('exampleInputPassword').value;
+
+            var user = await fetch('http://127.0.0.1:8000/customusers/');
+            var userdata = await user.json();
+
+            for (var i = 0; i < userdata.length; i++) {
+                if (userdata[i].email === exampleInputEmail && userdata[i].password.toLowerCase() === passd.toLowerCase()) {
+                    const userType = userdata[i].userType;
+                    console.log('userType: '+userType)
+
+                    // Redirect based on user type
+                    if (userType === 'workerTeam') {
+                        window.location.href = "http://127.0.0.1:5502/customer/dashbord3/workersTeam.html";
+                    } else if (userType === 'techninicalTeam') {
+                        window.location.href = "http://127.0.0.1:5502/customer/dashbord3/TechnicalTeam.html";
+                    } else if (userType === 'drone_operator') {
+                        window.location.href = "http://127.0.0.1:5502/customer/dashbord3/DroneOperation.html";
+                    }
+
+                    return; // Stop searching for user data
+                }
+            }
+
+            // User not found in the database
+            alert('Invalid username or password.');
+        }
+
+        // Attach the function to the form submission event
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', fetchUserLoginData);
+
+    </script>
+
+
+</body>
+
+</html>
